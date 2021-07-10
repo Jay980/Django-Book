@@ -38,13 +38,13 @@
                     
                     <div class="page-title">
                         <br>
-                        &nbsp;<a href="{% url 'addbook'  %}" class="btn btn-outline-info btn-rounded">Add Book<i  style="color:red"></i></a>
-                        &nbsp;<a href="{% url 'showbook'  %}" class="btn btn-outline-info btn-rounded">Show Book<i  style="color:red"></i></a>
+                        &nbsp;<a href="{% url 'AddBook'  %}" class="btn btn-outline-info btn-rounded">Add Book<i  style="color:red"></i></a>
+                        &nbsp;<a href="{% url 'ShowBook'  %}" class="btn btn-outline-info btn-rounded">Show Book<i  style="color:red"></i></a>
         
                         <h3 class="text-center">Books List
                         </h3>
                     </div>
-                    <form action="{% url 'searchbook'  %}" method="post">
+                    <form action="{% url 'ShowBook'  %}" method="post">
                         {% csrf_token %}
 
                     <div class="row" style="display: flexbox; background-color: white;">

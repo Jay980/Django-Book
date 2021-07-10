@@ -34,9 +34,23 @@
         <div id="body" class="active">
            
             <div class="content ">
-                &nbsp;<a href="{% url 'addbook'  %}" class="btn btn-outline-info btn-rounded">Add Book<i  style="color:red"></i></a>
-                &nbsp;<a href="{% url 'showbook'  %}" class="btn btn-outline-info btn-rounded">Show Book<i  style="color:red"></i></a>
-
+                &nbsp;<a href="{% url 'AddBook' %}" class="btn btn-outline-info btn-rounded">Add Book<i  style="color:red"></i></a>
+                &nbsp;<a href="{% url 'ShowBook'  %}" class="btn btn-outline-info btn-rounded">Show Book<i  style="color:red"></i></a>
+                {% if messages %}
+                <ul class="messages" style="right:22 ; position: relative;" >
+                    {% for message in messages %}
+                    <div class=" container-fluid p-0 ">
+                         
+   
+                        <div class="alert alert-success {{ message.tags }} alert-dismissible" role="alert" >
+                            {{ message }}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <br>
                 <br>
                 <div class="container align-self-center">
@@ -45,13 +59,13 @@
                                 <div class="card-header">Add Book</div>
                                 <div class="card-body">
                                
-                                    <form class="needs-validation" novalidate accept-charset="utf-8" method="post" enctype="multipart/form-data">
+                                    <form class="needs-validation" novalidate accept-charset="utf-8" method="post">
                                       {% csrf_token %}
                                         <div class="form-row">
                                             <div class="form-group col-md-12" style="text-align: left;">
                                                 <label for="Book">Book Name</label>
 
-                                                {% render_field bookform.book_name class="form-control" placeholder="Book Name" %}
+                                                {% render_field form.book_name class="form-control" placeholder="Book Name" %}
                                                 
                                             </div>
                                             
@@ -60,7 +74,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-12"  style="text-align: left;">
                                                 <label for="author">Author</label>
-                                                {% render_field bookform.author class="form-control" placeholder="Author" %}
+                                                {% render_field form.author class="form-control" placeholder="Author" %}
 
                                                 
                                             </div>
@@ -70,7 +84,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-12"  style="text-align: left;">
                                                 <label for="genre">Genre</label>
-                                                {% render_field bookform.genre class="form-control" placeholder="Genre" %}
+                                                {% render_field form.genre class="form-control" placeholder="Genre" %}
                                                 
                                             </div>
                                           
@@ -79,7 +93,7 @@
                                         <div class="form-row">
                                           <div class="form-group col-md-12"  style="text-align: left;">
                                               <label for="language">Language</label>
-                                              {% render_field bookform.language class="form-control" placeholder="Language" %}
+                                              {% render_field form.language class="form-control" placeholder="Language" %}
                                               
                                           </div>
                                       
