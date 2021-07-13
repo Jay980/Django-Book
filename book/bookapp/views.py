@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from . import forms,models
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
-from .forms import bookform
+from .forms import bookform,yourForm
 from django.contrib import messages
 
 from operator import and_
@@ -20,9 +20,11 @@ class AddBook(TemplateView):
   def get_context_data(self, *args, **kwargs):
     context = super().get_context_data(**kwargs)
     fm = bookform()
-    context = {'form':fm}
+    form1=yourForm()
+    context = {'form':fm,'form1':form1}
     return context
   
+
   def post(self, request):
        bookform=forms.bookform()
        if request.method=='POST':
@@ -70,7 +72,9 @@ class ShowBook(TemplateView):
         return data
   def post(self, request):
     print("This is Post Function")
-    genrelist1 = request.POST.getlist('genrecheck[]')
+    genrelist1 = request.POST.getlist('genrecheck1[]')
+    print(genrelist1)
+    #genrelist1 = request.POST.getlist('genrecheck[]')
     languagelist1 = request.POST.getlist('langauagecheck[]')
     print
     data = {}
@@ -101,8 +105,9 @@ class ShowBook(TemplateView):
     if not languagelist1:
         languagelist1=language_unique
     book= Bookinfo.objects.filter(Q(genre__in=genrelist1) & Q(language__in=languagelist1))
- 
+    
     data['book'] = book
+    data['selectedlist']=genrelist1
     return render(request,'book/showbooks.html',data)
     
     

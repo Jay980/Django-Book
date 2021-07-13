@@ -21,10 +21,35 @@
     <link href="/static/assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/assets/css/master.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <style>
     
 </style>
+
+
+<script >
+
+    $(document).ready(function()
+    { 
+      $('.checkvalues').click(function(){
+      var GenreValues=''
+      $('.checkvalues:checked').each(function(){
+
+        GenreValues+=$(this).val()+","
+
+
+})
+GenreValues=GenreValues.substring(0,GenreValues.length-1);
+$('#GenreBox').val(GenreValues);
+
+      });
+
+    });
+</script>
 <body>
   
 
@@ -47,6 +72,25 @@
                     <form action="{% url 'ShowBook'  %}" method="post">
                         {% csrf_token %}
 
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Genre 
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for i in k %}
+                                <div class="form-check">
+                                   
+                                    &nbsp;  <input class="form-check-input checkvalues" type="checkbox"name='genrecheck1[]'  value="{{i}}" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{i}}
+                                    </label>
+                              
+                                  </div>
+                                  {% endfor%}
+                            </div>
+                            <input type="text"  id='GenreBox' readonly name='genrename' />
+                            
+                          </div>
                     <div class="row" style="display: flexbox; background-color: white;">
                           <div class="genre"> Genre
                             <div class="form-check">
